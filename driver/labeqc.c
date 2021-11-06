@@ -287,7 +287,7 @@ static int labeqc_instruction_list_ioctl(unsigned long user_instruction_list)
   LABEQC_Instruction_List instruction_list;
   LABEQC_Instruction *instruction = (LABEQC_Instruction *) NULL;
 
-  if (copy_from_user(&instruction_list, (void *) user_instruction_list, sizeof(LABEQC_Instruction_List)) != 0)
+  if (raw_copy_from_user(&instruction_list, (void *) user_instruction_list, sizeof(LABEQC_Instruction_List)) != 0)
     return (-EFAULT);
 
   // Check the number of commands to eliminate memory problems
@@ -308,7 +308,7 @@ static int labeqc_instruction_list_ioctl(unsigned long user_instruction_list)
   if (instruction == (LABEQC_Instruction *) NULL) 
     return (-ENOMEM);
 
-  if (copy_from_user(instruction, instruction_list.instructions, instruction_list.num_instructions * sizeof(LABEQC_Instruction)) != 0)
+  if (raw_copy_from_user(instruction, instruction_list.instructions, instruction_list.num_instructions * sizeof(LABEQC_Instruction)) != 0)
    {
      kfree(instruction);
      return (-EFAULT);
@@ -373,7 +373,7 @@ static int labeqc_instruction_list_ioctl(unsigned long user_instruction_list)
        }
    }
 
-  if (copy_to_user(instruction_list.instructions, instruction, instruction_list.num_instructions * sizeof(LABEQC_Instruction)) != 0)
+  if (raw_copy_to_user(instruction_list.instructions, instruction, instruction_list.num_instructions * sizeof(LABEQC_Instruction)) != 0)
    {
      kfree(instruction);
      return (-EFAULT);
