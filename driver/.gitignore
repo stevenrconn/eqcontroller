@@ -1,0 +1,11 @@
+/.labeqc.ko.cmd
+/.labeqc.mod.o.cmd
+/.labeqc.o.cmd
+/.tmp_versions
+/Module.symvers
+/Module.markers
+/labeqc.ko
+/labeqc.mod.c
+/modules.order
+/testdir/.install
+/testdir/test_labeqc
