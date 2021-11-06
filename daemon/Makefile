@@ -2,17 +2,17 @@
 # Makefile for the controller daemon.
 #
 CFLAGS=-g -Wall
-LIBS= -lnsl -lwrap
+LDFLAGS=
 CC = gcc
 PREFIX = /usr/local/eqcontroller
 
 all: labeqd eqslave
 
 labeqd: logutils.o labeqd.o
-	${CC} -o labeqd ${LIBS} logutils.o labeqd.o
+	${CC} -o labeqd ${LDFLAGS} logutils.o labeqd.o
 
 eqslave: logutils.o eqslave.o
-	${CC} -o eqslave ${LIBS} logutils.o eqslave.o
+	${CC} -o eqslave ${LDFLAGS} logutils.o eqslave.o
 
 clean:
 	rm -f *.o *~ core labeqd eqslave

@@ -37,7 +37,10 @@
 #include <string.h>
 #include <strings.h>
 #include <pwd.h>
+
+#ifdef USE_TCP_WRAPPERS
 #include <tcpd.h>
+#endif
 
 #define EQ_DAEMON
 #include "../include/labeqc.h"
@@ -398,6 +401,7 @@ int main(int argc, char *argv[], char *envp[])
                 continue;
 	     }
 
+#ifdef USE_TCP_WRAPPERS
             /* check to see if the request is allowed via tcp wrappers */
             strcpy(clientip, inet_ntoa(nsockin.sin_addr)); 
             if (hosts_ctl(SERVICE_NAME, STRING_UNKNOWN, clientip, STRING_UNKNOWN) == 0)
@@ -407,7 +411,8 @@ int main(int argc, char *argv[], char *envp[])
                close(ChildSock);
                continue;
              }
-            
+#endif
+
             /* set the socket descriptor for blocking I/O */
             x = 0;
             if (ioctl(ChildSock, FIONBIO, (char *) &x) < 0) 
