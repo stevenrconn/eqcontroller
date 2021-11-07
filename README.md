@@ -6,5 +6,6 @@ OpenCoral Equipment Controller Daemon
 * git
 * make
 * gcc
+* tar
 * kernel-devel
 * elfutils-libelf-devel
